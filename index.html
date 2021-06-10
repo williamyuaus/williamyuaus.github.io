@@ -201,7 +201,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-06-10 12:00:27 / Modified: 13:30:07" itemprop="dateCreated datePublished" datetime="2021-06-10T12:00:27+10:00">2021-06-10</time>
+      <time title="Created: 2021-06-10 12:00:27 / Modified: 13:50:45" itemprop="dateCreated datePublished" datetime="2021-06-10T12:00:27+10:00">2021-06-10</time>
     </span>
 
   
@@ -218,15 +218,14 @@
 <h1 id="The-issue-of-the-Vue-router-link"><a href="#The-issue-of-the-Vue-router-link" class="headerlink" title="The issue of the Vue router link"></a>The issue of the Vue router link</h1><p>Since I implemented The Vue Router in my application, I found an issue that is wired.</p>
 <p>When I hovered my cursor on the button, it cannot be clicked and switch to the route page immediately. There was nothing happened. All I need to do was that I need to place the cursor out of the button, and moved it back again. At this time, the same button might be clickable and switch to the correct page.<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210610115012.png"></p>
 <p>I was wondering if it is because some technicals need to be implemented to improve The Vue Router performance. I thought it might be because the app gets the ‘stuId’ for the route link very slow.</p>
-<p>But after searched on the internet for a while, I did not found any solutions. So I have to check my code again.</p>
-<h1 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h1><p>This is the snippet of code for the router link:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">&quot;scope&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">size</span>=<span class="string">&quot;mini&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-right: 2px&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">&quot;&#x27;/student/profile/&#x27; + scope.row.stuId + &#x27;/index&#x27;&quot;</span>&gt;</span></span><br><span class="line">            Profile</span><br><span class="line">        <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>I found the router-link tag only includes the ‘Profile’ text, not the whole el-button. So, I tried to hover my cursor on the text of the button, I can click the button immediately.</p>
-<p>So, the only clickable part is the text of the button. To solve this issue, I changed the button type to ‘text’. It works perfectly!</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">&quot;scope&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">size</span>=<span class="string">&quot;mini&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-right: 2px&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">&quot;&#x27;/student/profile/&#x27; + scope.row.stuId + &#x27;/index&#x27;&quot;</span>&gt;</span></span><br><span class="line">		    Profile</span><br><span class="line">      <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>  <img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210610115017.png"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/10/How-to-fix-the-Vue-router-link-issue/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -283,7 +282,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-06-09 09:48:26" itemprop="dateModified" datetime="2021-06-09T09:48:26+10:00">2021-06-09</time>
+        <time title="Modified: 2021-06-10 13:51:17" itemprop="dateModified" datetime="2021-06-10T13:51:17+10:00">2021-06-10</time>
       </span>
 
   
@@ -300,69 +299,14 @@
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在工作中总会让人头疼的一个问题就是，明明自己只是在一个技术或职能岗位，只要兢兢业业做好自己工作上的事情就应该OK了。但是在领导口中，或者是开会的时候，却总会被要求拥有领导力。</p>
 <p>领导力难道不是管理岗位的人才会被要求的吗？领导力难道不是只有当领导的人才可能会拥有的么？怎么现在对我们所有人都有这样的要求呢？</p>
 <p>对于这样的困惑，IT帮的早餐会就给出了一定的答案。</p>
-<h1 id="什么是领导力"><a href="#什么是领导力" class="headerlink" title="什么是领导力"></a>什么是领导力</h1><p>这一次的早餐会的分享嘉宾是Luna Wen，作为在澳洲研究生毕业之后两年不到的时间里，不仅成为了software engineer，同时还担任了公司招聘以及相关的管理职务。对于领导力，她的理解是：</p>
-<blockquote>
-<p>了解领导力和管理力的具体差别到底能对我们工作生活有什么帮助呢？我个人觉得没什么太大的用处，因为我身边的领导者往往是有着极强的综合能力，你很难去量化 TA 每个维度的数值。</p>
-</blockquote>
-<blockquote>
-<p>所以今天我并不想去细究概念上的区别，因为我认为，领导力的核心就是影响力，是别人是否愿意听你的，是否愿意和你沟通，是否愿意信任你，是否愿意和你一起朝着一个共同的目标去努力，这一切都来自于一个人的综合素质，而不是单一的某项能力。而且假如一个领导身边没有人信任 TA，那么 TA 就是个事实上的光杆司令，领导力也就无从谈起。</p>
-</blockquote>
-<p>起初我也是想找到一个关于领导力的准确定义，但是我发现，去追究概念上的区别对我们的意义并不大，一个能够服众的广泛定义就是Luna提到的能否影响他人，并让他人愿意和你朝一个共同的目标去努力。</p>
-<p>在这样的定义下，领导力不仅是个人的业务能力，沟通能力等综合能力，还需要一定的个人魅力，才能够产生足够影响他人的能力。</p>
-<h1 id="培养领导力"><a href="#培养领导力" class="headerlink" title="培养领导力"></a>培养领导力</h1><p>既然大家都认为领导力的门槛如此之高，那是不是意味着它对于我们大多数人都遥不可及呢？</p>
-<p>事实上，体现领导力的地方更多是在工作场合。只要让身边的人能感受到你做事的态度，你的专业能力，以及你的个人品质，久而久之，领导力也能随之而来。</p>
-<p>关于如何培养领导力，Luna精心准备的四步走方案值得借鉴。<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210518162410.png"></p>
-<blockquote>
-<p>第一点是寻找榜样，如果你听完前面的还是不知道从何开始，那么先找一个在你公司里面的 role model，去观察 TA 每天上班都在做什么，TA 关注的事情和你关注的有什么不同，TA 和别人沟通的方式和你有什么区别，有了身边的榜样，你就可以找到自己和榜样的差距，更加有针对性的去提高自己欠缺的部分。</p>
-</blockquote>
-<blockquote>
-<p>第二点是主动请缨，当公司里面有一些紧急事务需要有人做的时候，你是否会主动承担起责任，带头完成这些事情？假如你负责了这件事，你是否能够保证这件事情漂亮地做完，而不是做到一半就烂尾？</p>
-</blockquote>
-<blockquote>
-<p>第三点是积极主动，如果你发现当前的工作流程有一些可以改进的地方，那么你可以提出切实可行的改进意见，并且和你的领导去讨论这些解决方案。</p>
-</blockquote>
-<blockquote>
-<p>第四点是向上管理，如果你和自己的直属上司没有定期 1 对 1，那么你可以主动要求每两周 catchup 一次，1 对 1 的沟通中可以体现你的思考、你的进步、以及你遇到的阻碍，增进你和上级之间的相互了解和信任。</p>
-</blockquote>
-<p>看到Luna给出的这四点，我感受到最核心的就是在于主动性。主动性不仅能让你在周围人中感觉到你对工作的积极与上心，同时也能促使自己能更加负责的对待工作。无论是对事还是对人，主动都能让你更加的用心去做好一件事情，同时也更能有负责任的态度，从而影响到其他人。</p>
-<p>不仅如此，Luna还给出了她自己的例子。</p>
-<blockquote>
-<p>寻找榜样：我身边有很多值得学习的人，尤其是 CTO 和 CEO，我们公司的 CEO 是女性，有两个娃，而且曾经做过 tech lead，我能从她的身上学到很多东西；CTO 看问题的角度也能给我很多启发，每次遇到技术难题我都会跟 CTO 讨论，看他是如何比较不同方案的；</p>
-</blockquote>
-<blockquote>
-<p>主动请缨：我主动接下了一些没人响应的 task，有技术相关的（比如 sso integration，SOAP API integration），也有组织管理相关的（比如每周三的公司游戏，每周五的技术分享）；</p>
-</blockquote>
-<blockquote>
-<p>积极主动：我刚来公司的时候，documentation 很少，而且也没人维护，于是我主动承担了 documentation 这块工作，并且鼓励所有人一起参与文档的维护；另外我还设计了公司新人的 onboarding procedure，把所有 session 都录制下来，这样可以节约整个 team 的时间，也能同时 onboarding 多个新员工；</p>
-</blockquote>
-<blockquote>
-<p>向上管理：一开始我和上级（CTO）没有定期 1 对 1 的会议，于是我跟 CTO 提出是否可以两周 meetup 一次，一起喝个咖啡，每次 1 对 1 会议我都会提前准备一些想要讨论的话题，确保这段时间能有效被利用起来。</p>
-</blockquote>
-<p>看到Luna 的例子之后，也许就更能够去理解她说的这四点了。特别是在一些比较困难以及其他人不太愿意做的任务上，她选择主动去做。同时她借鉴了 CTO 和 CEO 的一些优秀品质，并且及时且持续的得到 CEO 的反馈。</p>
-<p>这让她在做这些任务的时候，对周围的人产生了一定的影响力。当同事看到这些曾经的硬骨头被 Luna 给拿下之后，自然就对她肃然起敬。与此同时，在这些任务上，她自然就拥有了相应的领导力。</p>
-<p>不得不说，能做到这四点，有个很重要的前提，那就是自身的业务能力必须过硬。如果积极主动的去要求做一些事，但是自己却无法很好的完成的话，那其实对自身的领导力是扣分的。</p>
-<p>所以各位同学，在看到可以展示领导力的机会的时候，还是先掂量掂量自身的能力，在自己认为能够 hold 住的时候再去主动请缨吧。</p>
-<p>对于这一点，Luna也特别的强调了：</p>
-<blockquote>
-<p>当然，这一切都有一个核心，你自己的业务能力要强。因为领导力是建立在别人对你的信任上的，而信任源自你扎实的业务能力、不断学习精进的态度、以及发自内心希望公司因为你的存在而变得更好的初心。</p>
-</blockquote>
-<h1 id="领导力和管理岗位"><a href="#领导力和管理岗位" class="headerlink" title="领导力和管理岗位"></a>领导力和管理岗位</h1><p>在问答环节的时候，我提出的一个有幸被大家选中讨论。我的问题是：</p>
-<blockquote>
-<p>如何在做纯技术岗位的时候锻炼和提升领导力，并为以后的转型做准备？</p>
-</blockquote>
-<p>对于这个问题，路达的解释让我特别有感触。</p>
-<p>他说，管理岗位上的人并不代表就有领导力。同样的，具备领导力的人也不一定必须是在管理岗位上的。他举了这样一个例子：</p>
-<blockquote>
-<p>想象有一群人行走在沙漠上，大家饥渴难耐。这时候有一个人，走到了高处，一番瞭望之后，指着一个方向对大家喊道：“我们朝那个方向前进，那边有水源。”</p>
-</blockquote>
-<blockquote>
-<p>然而这个时候，人群中有一个人对大家厉声呵斥道：“别乱走，大家保持队形！”</p>
-</blockquote>
-<p>可能你已经注意到了，在这个寓言般的例子中，那个给大家指出方向的人是有领导力的，而之后叫喊保持队形的人是管理者。</p>
-<p>管理者往往更多的考虑到自身的利益，而领导力的人会更多为大家和整个公司的利益做出努力。<br>所以，当你有机会并且也愿意为大家的利益付出努力的时候，就可以尝试去做。领导力也能随之而来，不必在乎此时的你是否是在管理岗位上。</p>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>这次的早餐会看似有个比较宏大的主题，不过讲得还是非常的接地气。大家的讨论也很是精彩。</p>
-<p>虽然疫情对每个人的职业发展或多或少造成了些影响，不过还是感受到了大家依然很有干劲，也很乐于分享。希望疫情能快点离开，让我们早日恢复正常。<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210609093507.png"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/20/%E8%A7%A6%E6%89%8B%E5%8F%AF%E5%8F%8A%E7%9A%84%E9%A2%86%E5%AF%BC%E5%8A%9B/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
