@@ -201,7 +201,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-06-10 12:00:27 / Modified: 12:47:21" itemprop="dateCreated datePublished" datetime="2021-06-10T12:00:27+10:00">2021-06-10</time>
+      <time title="Created: 2021-06-10 12:00:27 / Modified: 13:30:07" itemprop="dateCreated datePublished" datetime="2021-06-10T12:00:27+10:00">2021-06-10</time>
     </span>
 
   
@@ -214,12 +214,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="How-to-fix-the-Vue-router-link-issue"><a href="#How-to-fix-the-Vue-router-link-issue" class="headerlink" title="How to fix the Vue router link issue"></a>How to fix the Vue router link issue</h1><p><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210610115342.png"></p>
-<h2 id="The-issue-of-the-Vue-router-link"><a href="#The-issue-of-the-Vue-router-link" class="headerlink" title="The issue of the Vue router link"></a>The issue of the Vue router link</h2><p>Since I implemented The Vue Router in my application, I found an issue that is wired.</p>
+          <p><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210610115342.png"></p>
+<h1 id="The-issue-of-the-Vue-router-link"><a href="#The-issue-of-the-Vue-router-link" class="headerlink" title="The issue of the Vue router link"></a>The issue of the Vue router link</h1><p>Since I implemented The Vue Router in my application, I found an issue that is wired.</p>
 <p>When I hovered my cursor on the button, it cannot be clicked and switch to the route page immediately. There was nothing happened. All I need to do was that I need to place the cursor out of the button, and moved it back again. At this time, the same button might be clickable and switch to the correct page.<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210610115012.png"></p>
 <p>I was wondering if it is because some technicals need to be implemented to improve The Vue Router performance. I thought it might be because the app gets the ‘stuId’ for the route link very slow.</p>
 <p>But after searched on the internet for a while, I did not found any solutions. So I have to check my code again.</p>
-<h2 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h2><p>This is the snippet of code for the router link:</p>
+<h1 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h1><p>This is the snippet of code for the router link:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">&quot;scope&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">size</span>=<span class="string">&quot;mini&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-right: 2px&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">&quot;&#x27;/student/profile/&#x27; + scope.row.stuId + &#x27;/index&#x27;&quot;</span>&gt;</span></span><br><span class="line">            Profile</span><br><span class="line">        <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>I found the router-link tag only includes the ‘Profile’ text, not the whole el-button. So, I tried to hover my cursor on the text of the button, I can click the button immediately.</p>
