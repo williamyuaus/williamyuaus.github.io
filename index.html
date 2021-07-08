@@ -132,7 +132,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -170,6 +170,81 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://williamyu.live/2021/07/08/How-to-fix-Add-new-plugin-menu-missing-in-WordPress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/william-avatar.JPG">
+      <meta itemprop="name" content="William Yu">
+      <meta itemprop="description" content="Software Developer from the user side">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="William Yu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/08/How-to-fix-Add-new-plugin-menu-missing-in-WordPress/" class="post-title-link" itemprop="url">How to fix 'Add new plugin menu' missing in WordPress</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-08 14:47:09 / Modified: 14:51:36" itemprop="dateCreated datePublished" datetime="2021-07-08T14:47:09+10:00">2021-07-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210708144905.png"></p>
+<p>Plugins are very important for WordPress development. By default, we can add new plugin in the WordPress sidebar.</p>
+<p><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210708143347.png"></p>
+<p>However, I just found that the ‘Add new plugin menu’ is missing in my WordPress site.</p>
+<p><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210708143354.png"></p>
+<p>The plugins can only be clicked as shown the list of installed plugins. Which means I cannot add new plugins on my site.</p>
+<p>To fix this issue, I tried several ways. Firstly, I changed the theme to the default one. But it did not work. Secondly, I tried to deactivate all the plugins and re-active them later. Unfortunately, there was no magic.</p>
+<p>Finally, I did some research, and found the solution. Go to the file system of the WordPress site, and find the ‘wp-config.php’ file. Usually, it is located in the root install-directory. Then, open it and find the very last two lines of code. Which is:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">&#x27;DISALLOW_FILE_EDIT&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">define(<span class="string">&#x27;DISALLOW_FILE_MODS&#x27;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Just simply change the ‘true’ to ‘false’, and save it. The ‘add new plugin menu’ will be back!<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210708144221.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
