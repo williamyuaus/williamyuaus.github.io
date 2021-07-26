@@ -192,7 +192,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/26/How-to-install-Docker-in-AWS-EC2-instances/" class="post-title-link" itemprop="url">How-to-install-Docker-in-AWS-EC2-instances</a>
+          <a href="/2021/07/26/How-to-install-Docker-in-AWS-EC2-instances/" class="post-title-link" itemprop="url">How to install Docker in AWS EC2 instances</a>
         </h2>
 
         <div class="post-meta-container">
@@ -204,7 +204,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-07-26 10:31:50 / Modified: 10:32:39" itemprop="dateCreated datePublished" datetime="2021-07-26T10:31:50+10:00">2021-07-26</time>
+      <time title="Created: 2021-07-26 10:31:50 / Modified: 10:39:42" itemprop="dateCreated datePublished" datetime="2021-07-26T10:31:50+10:00">2021-07-26</time>
     </span>
 
   
@@ -222,21 +222,14 @@
 <li><p>Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png"></p>
 </li>
 <li><p>Before installing Docker, you may need to update the installed packages and package cache on your instance.<br><code>sudo yum update -y</code><br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png"></p>
-</li>
-<li><p>If your instance is Amazon Linux 2, using the command to install the most recent Docker Engine package.<br><code>sudo amazon-linux-extras install docker</code><br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png"></p>
-<p>You will see the info about the installation successfully.<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png"></p>
-</li>
-<li><p>Now, you can start the Docker service.<br><code>sudo service docker start</code></p>
-</li>
-<li><p>It is recommended to add the ec2-user to the docker group, in order to execute Docker commands without using sudo.<br><code>sudo usermod -a -G docker ec2-user</code></p>
-</li>
-<li><p>However, if you want to verify the Docker commands now, you may get this error.<img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png"></p>
-</li>
-<li><p>To solve this issue, it is required to log out and log back in again, so new docker group permissions can be picked up. To achieve this, just close your current SSH terminal window and reconnect to your instance. The new session can have the permissions. <img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png"></p>
-</li>
-</ol>
-<p>Now, you successfully install docker in your AWS EC2 instances, you can play with Docker now.</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/26/How-to-install-Docker-in-AWS-EC2-instances/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
