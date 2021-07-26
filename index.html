@@ -132,7 +132,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -170,6 +170,89 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://williamyu.live/2021/07/26/How-to-install-Docker-in-AWS-EC2-instances/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/william-avatar.JPG">
+      <meta itemprop="name" content="William Yu">
+      <meta itemprop="description" content="Software Developer from the user side">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="William Yu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/26/How-to-install-Docker-in-AWS-EC2-instances/" class="post-title-link" itemprop="url">How-to-install-Docker-in-AWS-EC2-instances</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-26 10:31:50 / Modified: 10:32:39" itemprop="dateCreated datePublished" datetime="2021-07-26T10:31:50+10:00">2021-07-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Once you have created an AWS EC2 instance, you probably want to  deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.</p>
+<ol>
+<li><p>Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png"></p>
+</li>
+<li><p>Before installing Docker, you may need to update the installed packages and package cache on your instance.<br><code>sudo yum update -y</code><br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png"></p>
+</li>
+<li><p>If your instance is Amazon Linux 2, using the command to install the most recent Docker Engine package.<br><code>sudo amazon-linux-extras install docker</code><br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png"></p>
+<p>You will see the info about the installation successfully.<br><img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png"></p>
+</li>
+<li><p>Now, you can start the Docker service.<br><code>sudo service docker start</code></p>
+</li>
+<li><p>It is recommended to add the ec2-user to the docker group, in order to execute Docker commands without using sudo.<br><code>sudo usermod -a -G docker ec2-user</code></p>
+</li>
+<li><p>However, if you want to verify the Docker commands now, you may get this error.<img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png"></p>
+</li>
+<li><p>To solve this issue, it is required to log out and log back in again, so new docker group permissions can be picked up. To achieve this, just close your current SSH terminal window and reconnect to your instance. The new session can have the permissions. <img src="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png"></p>
+</li>
+</ol>
+<p>Now, you successfully install docker in your AWS EC2 instances, you can play with Docker now.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
