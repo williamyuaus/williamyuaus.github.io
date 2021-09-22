@@ -1,0 +1,146 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title>Fix 413 Request Entity Too Large Error - William Yu</title><meta name=Description content="William Yu's Blog"><meta property="og:title" content="Fix 413 Request Entity Too Large Error">
+<meta property="og:description" content="After I deployed my web app online, when I tried to upload a PDF file to store in AWS S3 bucket, I received the 413 error as below.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://williamyuaus.com/2021/08/fix-413-request-entity-too-large-error/"><meta property="og:image" content="https://williamyuaus.com/logo.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-08-27T14:20:09+10:00">
+<meta property="article:modified_time" content="2021-08-27T14:20:09+10:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://williamyuaus.com/logo.png">
+<meta name=twitter:title content="Fix 413 Request Entity Too Large Error">
+<meta name=twitter:description content="After I deployed my web app online, when I tried to upload a PDF file to store in AWS S3 bucket, I received the 413 error as below.">
+<meta name=application-name content="William Yu">
+<meta name=apple-mobile-web-app-title content="William Yu"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://williamyuaus.com/2021/08/fix-413-request-entity-too-large-error/><link rel=prev href=https://williamyuaus.com/2021/08/change-the-language-of-vue-image-crop-upload/><link rel=next href=https://williamyuaus.com/2021/08/how-to-deploy-a-spring-boot-and-vue-application-on-aws-ec2-using-docker/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Fix 413 Request Entity Too Large Error","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/williamyuaus.com\/2021\/08\/fix-413-request-entity-too-large-error\/"},"genre":"posts","wordcount":224,"url":"https:\/\/williamyuaus.com\/2021\/08\/fix-413-request-entity-too-large-error\/","datePublished":"2021-08-27T14:20:09+10:00","dateModified":"2021-08-27T14:20:09+10:00","publisher":{"@type":"Organization","name":"William Yu"},"author":{"@type":"Person","name":"William Yu"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="William Yu">William Yu</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/categories/> Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="William Yu">William Yu</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX">Fix 413 Request Entity Too Large Error</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=https://williamyuaus.com title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>William Yu</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-08-27>2021-08-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;224 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+</div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826211757.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826211757.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826211757.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826211757.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826211757.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826211757.png></div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
+</div><div class=content id=content><p>After I deployed my web app online, when I tried to upload a PDF file to store in AWS S3 bucket, I received the 413 error as below.</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826212105.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826212105.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826212105.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826212105.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826212105.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210826212105.png></p>
+<p>The 413 request entity too large error means that a client has sent a request to a web server but the request is too large for the server to process. Normally, there is an HTTP request size limit has been setting for a server. So, if the request is over the limit, you will get the 413 error.</p>
+<p>To solve the issue, you should modify the request size limit to avoid the error.</p>
+<p>In my case, Nginx as my web server. The configuration file for NGINX needs to be modified. Normally, the config file is located at /etc/nginx/nginx.conf. You can add one line to change the request size limit:</p>
+<pre tabindex=0><code>client_max_body_size 100M;
+</code></pre><p>This line should be located inside of http section. So, the default nginx.conf file should be modified as follow:</p>
+<pre tabindex=0><code>user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+                      '$status $body_bytes_sent &quot;$http_referer&quot; '
+                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    client_max_body_size 100M;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+</code></pre><p>Then, restart the Nginx server with the new config file. The 413 error will be solved.</p></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2021-08-27</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/2021/08/change-the-language-of-vue-image-crop-upload/ class=prev rel=prev title="Change the Language of Vue Image Crop Upload"><i class="fas fa-angle-left fa-fw"></i>Change the Language of Vue Image Crop Upload</a>
+<a href=/2021/08/how-to-deploy-a-spring-boot-and-vue-application-on-aws-ec2-using-docker/ class=next rel=next title="How to Deploy a Spring Boot and Vue Application on AWS EC2 Using Docker">How to Deploy a Spring Boot and Vue Application on AWS EC2 Using Docker<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id=comments><div id=utterances></div><noscript>
+Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.
+</noscript></div></article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://williamyuaus.com target=_blank>William Yu</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"williamyuaus/blog_comments"}}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>
