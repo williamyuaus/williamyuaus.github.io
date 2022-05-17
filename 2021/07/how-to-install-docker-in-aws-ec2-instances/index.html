@@ -1,142 +1,17 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>How to Install Docker in AWS EC2 Instances - William Yu</title><meta name=Description content="William Yu's Blog"><meta property="og:title" content="How to Install Docker in AWS EC2 Instances">
-<meta property="og:description" content="Once you have created an AWS EC2 instance, you probably want to deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.
-  Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:   Before installing Docker, you may need to update the installed packages and package cache on your instance.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://williamyuaus.com/2021/07/how-to-install-docker-in-aws-ec2-instances/"><meta property="og:image" content="https://williamyuaus.com/logo.png"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-07-26T14:15:42+10:00">
-<meta property="article:modified_time" content="2021-07-26T14:15:42+10:00">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://williamyuaus.com/logo.png">
-<meta name=twitter:title content="How to Install Docker in AWS EC2 Instances">
-<meta name=twitter:description content="Once you have created an AWS EC2 instance, you probably want to deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.
-  Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:   Before installing Docker, you may need to update the installed packages and package cache on your instance.">
-<meta name=application-name content="William Yu">
-<meta name=apple-mobile-web-app-title content="William Yu"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://williamyuaus.com/2021/07/how-to-install-docker-in-aws-ec2-instances/><link rel=prev href=https://williamyuaus.com/2021/07/how-to-fix-add-new-plugin-menu-missing-in-wordpress/><link rel=next href=https://williamyuaus.com/2021/08/how-to-post-an-article-in-wordpress/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"How to Install Docker in AWS EC2 Instances","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/williamyuaus.com\/2021\/07\/how-to-install-docker-in-aws-ec2-instances\/"},"genre":"posts","wordcount":218,"url":"https:\/\/williamyuaus.com\/2021\/07\/how-to-install-docker-in-aws-ec2-instances\/","datePublished":"2021-07-26T14:15:42+10:00","dateModified":"2021-07-26T14:15:42+10:00","publisher":{"@type":"Organization","name":"William Yu"},"author":{"@type":"Person","name":"William Yu"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('theme','dark')</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/ title="William Yu">William Yu</a>
-</div>
-<div class=menu>
-<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/categories/> Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/ title="William Yu">William Yu</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
-<i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>Contents</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">How to Install Docker in AWS EC2 Instances</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=https://williamyuaus.com title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>William Yu</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-07-26>2021-07-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;218 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
-</div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>Contents</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
-</div><div class=content id=content><p>Once you have created an AWS EC2 instance, you probably want to deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.</p>
-<ol>
-<li>
-<p>Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:
-<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png></p>
-</li>
-<li>
-<p>Before installing Docker, you may need to update the installed packages and package cache on your instance.
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>How to Install Docker in AWS EC2 Instances - William Yu</title><meta name=Description content="William Yu's Blog"><meta property="og:title" content="How to Install Docker in AWS EC2 Instances"><meta property="og:description" content="Once you have created an AWS EC2 instance, you probably want to deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.
+  Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:   Before installing Docker, you may need to update the installed packages and package cache on your instance."><meta property="og:type" content="article"><meta property="og:url" content="https://williamyuaus.com/2021/07/how-to-install-docker-in-aws-ec2-instances/"><meta property="og:image" content="https://williamyuaus.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-07-26T14:15:42+10:00"><meta property="article:modified_time" content="2021-07-26T14:15:42+10:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://williamyuaus.com/logo.png"><meta name=twitter:title content="How to Install Docker in AWS EC2 Instances"><meta name=twitter:description content="Once you have created an AWS EC2 instance, you probably want to deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.
+  Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:   Before installing Docker, you may need to update the installed packages and package cache on your instance."><meta name=application-name content="William Yu"><meta name=apple-mobile-web-app-title content="William Yu"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://williamyuaus.com/2021/07/how-to-install-docker-in-aws-ec2-instances/><link rel=prev href=https://williamyuaus.com/2021/07/how-to-fix-add-new-plugin-menu-missing-in-wordpress/><link rel=next href=https://williamyuaus.com/2021/08/how-to-post-an-article-in-wordpress/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"How to Install Docker in AWS EC2 Instances","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/williamyuaus.com\/2021\/07\/how-to-install-docker-in-aws-ec2-instances\/"},"genre":"posts","wordcount":218,"url":"https:\/\/williamyuaus.com\/2021\/07\/how-to-install-docker-in-aws-ec2-instances\/","datePublished":"2021-07-26T14:15:42+10:00","dateModified":"2021-07-26T14:15:42+10:00","publisher":{"@type":"Organization","name":"William Yu"},"author":{"@type":"Person","name":"William Yu"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="William Yu">William Yu</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="William Yu">William Yu</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">How to Install Docker in AWS EC2 Instances</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://williamyuaus.com title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>William Yu</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-07-26>2021-07-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;218 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726104413.png></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div></div><div class=content id=content><p>Once you have created an AWS EC2 instance, you probably want to deploy your app on it using Docker. So, you might need to install Docker in the EC2 instance first.</p><ol><li><p>Firstly, you need to connect to your instance via SSH. Once connected, you will see the command line in your terminal:
+<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726100843.png></p></li><li><p>Before installing Docker, you may need to update the installed packages and package cache on your instance.
 <code>sudo yum update -y</code>
-<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png></p>
-</li>
-<li>
-<p>If your instance is Amazon Linux 2, using the command to install the most recent Docker Engine package.
+<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101139.png></p></li><li><p>If your instance is Amazon Linux 2, using the command to install the most recent Docker Engine package.
 <code>sudo amazon-linux-extras install docker</code>
-<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png></p>
-<p>You will see the info about the installation successfully.
-<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png></p>
-</li>
-<li>
-<p>Now, you can start the Docker service.
-<code>sudo service docker start</code></p>
-</li>
-<li>
-<p>It is recommended to add the ec2-user to the docker group, in order to execute Docker commands without using sudo.
-<code>sudo usermod -a -G docker ec2-user</code></p>
-</li>
-<li>
-<p>However, if you want to verify the Docker commands now, you may get this error.<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png></p>
-</li>
-<li>
-<p>To solve this issue, it is required to log out and log back in again, so new docker group permissions can be picked up. To achieve this, just close your current SSH terminal window and reconnect to your instance. The new session can have the permissions. <img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png></p>
-</li>
-</ol>
-<p>Now, you successfully install docker in your AWS EC2 instances, you can play with Docker now.</p>
-</div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>Updated on 2021-07-26</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
-<span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags></section>
-<section>
-<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/2021/07/how-to-fix-add-new-plugin-menu-missing-in-wordpress/ class=prev rel=prev title="How to Fix Add New Plugin Menu Missing in WordPress"><i class="fas fa-angle-left fa-fw"></i>How to Fix Add New Plugin Menu Missing in WordPress</a>
-<a href=/2021/08/how-to-post-an-article-in-wordpress/ class=next rel=next title="How to Post an Article in WordPress">How to Post an Article in WordPress<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-<div id=comments><div id=utterances></div><noscript>
-Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.
-</noscript></div></article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://williamyuaus.com target=_blank>William Yu</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top">
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title="View Comments">
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"williamyuaus/blog_comments"}}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
-</html>
+<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101429.png></p><p>You will see the info about the installation successfully.
+<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726101550.png></p></li><li><p>Now, you can start the Docker service.
+<code>sudo service docker start</code></p></li><li><p>It is recommended to add the ec2-user to the docker group, in order to execute Docker commands without using sudo.
+<code>sudo usermod -a -G docker ec2-user</code></p></li><li><p>However, if you want to verify the Docker commands now, you may get this error.<img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102122.png></p></li><li><p>To solve this issue, it is required to log out and log back in again, so new docker group permissions can be picked up. To achieve this, just close your current SSH terminal window and reconnect to your instance. The new session can have the permissions. <img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/20210726102505.png></p></li></ol><p>Now, you successfully install docker in your AWS EC2 instances, you can play with Docker now.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2021-07-26</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/2021/07/how-to-fix-add-new-plugin-menu-missing-in-wordpress/ class=prev rel=prev title="How to Fix Add New Plugin Menu Missing in WordPress"><i class="fas fa-angle-left fa-fw"></i>How to Fix Add New Plugin Menu Missing in WordPress</a>
+<a href=/2021/08/how-to-post-an-article-in-wordpress/ class=next rel=next title="How to Post an Article in WordPress">How to Post an Article in WordPress<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://williamyuaus.com target=_blank>William Yu</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"williamyuaus/blog_comments"}}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
