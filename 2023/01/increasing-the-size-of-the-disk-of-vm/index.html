@@ -1,0 +1,114 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Increasing the Size of the Disk of VM - William Yu</title><meta name=Description content="William Yu's Blog"><meta property="og:title" content="Increasing the Size of the Disk of VM"><meta property="og:description" content="Intro As we are developing more and more projects on my VM, we might get a problem which is the disk would be full. Obviously, we can clean up our file system to free up more space. However, if you got the issue frequently, it is better to increase the size of your disk for your VM.
+Pre-check for your disks First of all, you need to know the status of your disks at beginning."><meta property="og:type" content="article"><meta property="og:url" content="https://williamyuaus.com/2023/01/increasing-the-size-of-the-disk-of-vm/"><meta property="og:image" content="https://williamyuaus.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-01-25T15:22:46+11:00"><meta property="article:modified_time" content="2023-01-25T15:22:46+11:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://williamyuaus.com/logo.png"><meta name=twitter:title content="Increasing the Size of the Disk of VM"><meta name=twitter:description content="Intro As we are developing more and more projects on my VM, we might get a problem which is the disk would be full. Obviously, we can clean up our file system to free up more space. However, if you got the issue frequently, it is better to increase the size of your disk for your VM.
+Pre-check for your disks First of all, you need to know the status of your disks at beginning."><meta name=application-name content="William Yu"><meta name=apple-mobile-web-app-title content="William Yu"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://williamyuaus.com/2023/01/increasing-the-size-of-the-disk-of-vm/><link rel=prev href=https://williamyuaus.com/2023/01/get-your-website-contact-form-away-from-spam/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Increasing the Size of the Disk of VM","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/williamyuaus.com\/2023\/01\/increasing-the-size-of-the-disk-of-vm\/"},"genre":"posts","keywords":"Virtual Machine, OpenSUSE, Azure","wordcount":1022,"url":"https:\/\/williamyuaus.com\/2023\/01\/increasing-the-size-of-the-disk-of-vm\/","datePublished":"2023-01-25T15:22:46+11:00","dateModified":"2023-01-25T15:22:46+11:00","publisher":{"@type":"Organization","name":"William Yu"},"author":{"@type":"Person","name":"William Yu"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><script async src=https://cdn.splitbee.io/sb.js></script><div class=header-wrapper><div class=header-title><a href=/ title="William Yu"><img class="lazyload logo" src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png>William Yu</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><script async src=https://cdn.splitbee.io/sb.js></script><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="William Yu"><img class="lazyload logo" src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202212181057858.png>William Yu</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Increasing the Size of the Disk of VM</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://williamyuaus.com title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>William Yu</a></span>&nbsp;<span class=post-category>included in <a href=/categories/virtual-machine/><i class="far fa-folder fa-fw"></i>Virtual Machine</a>&nbsp;<a href=/categories/opensuse/><i class="far fa-folder fa-fw"></i>OpenSUSE</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-01-25>2023-01-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1022 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251519566.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251519566.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251519566.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251519566.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251519566.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251519566.png></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#intro>Intro</a></li><li><a href=#pre-check-for-your-disks>Pre-check for your disks</a></li><li><a href=#increase-the-size-of-the-data-disk-on-azure-portal>Increase the size of the data disk on Azure portal</a></li><li><a href=#make-the-new-size-available-for-your-data-disk>Make the new size available for your data disk</a></li></ul></nav></div></div><div class=content id=content><h2 id=intro>Intro</h2><p>As we are developing more and more projects on my VM, we might get a problem which is the disk would be full. Obviously, we can clean up our file system to free up more space. However, if you got the issue frequently, it is better to increase the size of your disk for your VM.</p><h2 id=pre-check-for-your-disks>Pre-check for your disks</h2><p>First of all, you need to know the status of your disks at beginning. To have a pre-check of your disks, you can use the command: <code>sudo fdisk -l /dev/sdc</code> . The result would be similar like this:</p><pre tabindex=0><code>wyu@wyu-vm01:~&gt; sudo fdisk -l /dev/sdc
+Disk /dev/sdc: 128 GiB, 137438953472 bytes, 268435456 sectors
+Disk model: Virtual Disk    
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: gpt
+Disk identifier: 82719DF5-D3FE-4960-A694-DABB4556C3E9
+
+Device     Start       End   Sectors Size Type
+/dev/sdc1   2048 134215679 134213632  64G Linux filesystem
+</code></pre><p>Use command <code>df -h</code> to check the general info of your disks.</p><pre tabindex=0><code>wyu@wyu-vm01:~&gt; df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           7.9G   23M  7.8G   1% /dev/shm
+tmpfs           3.2G  9.9M  3.2G   1% /run
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+/dev/sdb4       127G   45G   83G  35% /
+/dev/loop3      583M  583M     0 100% /snap/datagrip/162
+/dev/loop4      185M  185M     0 100% /snap/gitkraken/201
+/dev/loop2       64M   64M     0 100% /snap/core20/1778
+/dev/loop0      586M  586M     0 100% /snap/datagrip/163
+/dev/loop1       64M   64M     0 100% /snap/core20/1738
+/dev/loop5      347M  347M     0 100% /snap/gnome-3-38-2004/115
+/dev/loop6      185M  185M     0 100% /snap/gitkraken/202
+/dev/loop7       56M   56M     0 100% /snap/core18/2667
+/dev/loop11     128K  128K     0 100% /snap/bare/5
+/dev/loop8      347M  347M     0 100% /snap/gnome-3-38-2004/119
+/dev/loop9       92M   92M     0 100% /snap/gtk-common-themes/1535
+/dev/loop10      56M   56M     0 100% /snap/core18/2654
+/dev/loop13     1.2G  1.2G     0 100% /snap/intellij-idea-ultimate/401
+/dev/loop12     1.2G  1.2G     0 100% /snap/intellij-idea-ultimate/398
+/dev/loop15     744M  744M     0 100% /snap/pycharm-professional/314
+/dev/loop14     674M  674M     0 100% /snap/phpstorm/307
+/dev/loop16     668M  668M     0 100% /snap/phpstorm/310
+/dev/loop17     757M  757M     0 100% /snap/pycharm-professional/316
+/dev/loop18     263M  263M     0 100% /snap/redis-desktop-manager/626
+/dev/loop19      50M   50M     0 100% /snap/snapd/17883
+/dev/loop20      50M   50M     0 100% /snap/snapd/17950
+/dev/loop22     605M  605M     0 100% /snap/webstorm/294
+/dev/loop21     602M  602M     0 100% /snap/webstorm/291
+/dev/sdc1        64G   36G   29G  57% /home
+/dev/sdb3      1014M   98M  917M  10% /boot
+/dev/sdb2       512M  3.0M  509M   1% /boot/efi
+tmpfs           1.6G   60K  1.6G   1% /run/user/470
+/dev/sda1        32G   24K   30G   1% /mnt
+tmpfs           1.6G   76K  1.6G   1% /run/user/1000
+</code></pre><p>As you can see above, I need to increase the size of my data disk, from 64G to 128G.</p><h2 id=increase-the-size-of-the-data-disk-on-azure-portal>Increase the size of the data disk on Azure portal</h2><p>To increase the size of the data disk, the first step is to increase it for my VM on Azure portal.</p><p>On the left panel of the Azure portal, click <code>Disks</code> and then click the data disk you want to increase.</p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251456266.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251456266.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251456266.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251456266.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251456266.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251456266.png></p><p>Then, click <code>Size + performance</code> to choose the new size of your data disk.</p><p><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251448466.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251448466.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251448466.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251448466.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251448466.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251448466.png></p><p>Click &ldquo;Save&rdquo; button, the VM will resize your data disk with the new size.</p><h2 id=make-the-new-size-available-for-your-data-disk>Make the new size available for your data disk</h2><p>Unfortunately, OpenSUSE will not automatically increase the file system. So the size will stay the same if you check your data disk. You need to resize file system to make the new free space available for use.</p><p>According the document from OpenSUSE (<a href=https://documentation.suse.com/sles/15-SP1/html/SLES-all/cha-resize-fs.html target=_blank rel="noopener noreffer">Resizing File Systems</a>) , we can use this command to increase the file system: <code>sudo xfs_growfs -d /dev/sdc1</code>. However, it did not work for me.</p><pre tabindex=0><code>meta-data=/dev/sdc1              isize=512    agcount=4, agsize=4194176 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=0    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=16776704, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=8191, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data size unchanged, skipping
+</code></pre><p>After some research, the reason is that the OS did not expand the partition automatically. So, there was no more free space for the partition to increase. To make it happen, we need to grow the partition first.</p><p>For OpenSUSE, we can use <code>growpart</code> to grow a partition. The command for the purpose is: <code>sudo growpart /dev/sdc 1</code>.</p><p>The result of the command shows that the size of the partition is changed.</p><p><code>CHANGED: partition=1 start=2048 old: size=134213632 end=134215680 new: size=268433375 end=268435423</code></p><p>Now, let&rsquo;s try to grow the file system with the previous command <code>sudo xfs_growfs -d /home</code>:</p><pre tabindex=0><code>sudo xfs_growfs -d /home
+meta-data=/dev/sdc1              isize=512    agcount=4, agsize=4194176 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=0    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=16776704, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=8191, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 16776704 to 33554171
+</code></pre><p>It looks great! Let&rsquo;s check the disk by <code>df -h</code>:</p><pre tabindex=0><code>wyu@wyu-vm01:~&gt; df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           7.9G   23M  7.8G   1% /dev/shm
+tmpfs           3.2G  9.9M  3.2G   1% /run
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+/dev/sdb4       127G   45G   83G  35% /
+/dev/loop3      583M  583M     0 100% /snap/datagrip/162
+/dev/loop4      185M  185M     0 100% /snap/gitkraken/201
+/dev/loop2       64M   64M     0 100% /snap/core20/1778
+/dev/loop0      586M  586M     0 100% /snap/datagrip/163
+/dev/loop1       64M   64M     0 100% /snap/core20/1738
+/dev/loop5      347M  347M     0 100% /snap/gnome-3-38-2004/115
+/dev/loop6      185M  185M     0 100% /snap/gitkraken/202
+/dev/loop7       56M   56M     0 100% /snap/core18/2667
+/dev/loop11     128K  128K     0 100% /snap/bare/5
+/dev/loop8      347M  347M     0 100% /snap/gnome-3-38-2004/119
+/dev/loop9       92M   92M     0 100% /snap/gtk-common-themes/1535
+/dev/loop10      56M   56M     0 100% /snap/core18/2654
+/dev/loop13     1.2G  1.2G     0 100% /snap/intellij-idea-ultimate/401
+/dev/loop12     1.2G  1.2G     0 100% /snap/intellij-idea-ultimate/398
+/dev/loop15     744M  744M     0 100% /snap/pycharm-professional/314
+/dev/loop14     674M  674M     0 100% /snap/phpstorm/307
+/dev/loop16     668M  668M     0 100% /snap/phpstorm/310
+/dev/loop17     757M  757M     0 100% /snap/pycharm-professional/316
+/dev/loop18     263M  263M     0 100% /snap/redis-desktop-manager/626
+/dev/loop19      50M   50M     0 100% /snap/snapd/17883
+/dev/loop20      50M   50M     0 100% /snap/snapd/17950
+/dev/loop22     605M  605M     0 100% /snap/webstorm/294
+/dev/loop21     602M  602M     0 100% /snap/webstorm/291
+/dev/sdc1       128G   36G   92G  29% /home
+/dev/sdb3      1014M   98M  917M  10% /boot
+/dev/sdb2       512M  3.0M  509M   1% /boot/efi
+tmpfs           1.6G   60K  1.6G   1% /run/user/470
+/dev/sda1        32G   24K   30G   1% /mnt
+tmpfs           1.6G   76K  1.6G   1% /run/user/1000
+</code></pre><p><img class=lazyload src=/svg/loading.min.svg data-src=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251516864.png data-srcset="https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251516864.png, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251516864.png 1.5x, https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251516864.png 2x" data-sizes=auto alt=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251516864.png title=https://raw.githubusercontent.com/williamyuaus/blog-img/master/img/202301251516864.png></p><p>As you can see, the size of my data disk increased. I will not be got the issue of disk is full in a short period of time.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-01-25</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/virtual-machine/>Virtual Machine</a>,&nbsp;<a href=/tags/opensuse/>OpenSUSE</a>,&nbsp;<a href=/tags/azure/>Azure</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/2023/01/get-your-website-contact-form-away-from-spam/ class=prev rel=prev title="Get Your Website Contact Form Away From Spam"><i class="fas fa-angle-left fa-fw"></i>Get Your Website Contact Form Away From Spam</a></div></div><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2020 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://williamyuaus.com target=_blank>William Yu</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"williamyuaus/blog_comments"}},twemoji:!0}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
